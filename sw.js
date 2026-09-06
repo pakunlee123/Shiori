@@ -1,4 +1,4 @@
-const CACHE_NAME = "shiori-v2-1";
+const CACHE_NAME = "shiori-v3";
 
 self.addEventListener("install", event => {
   self.skipWaiting();
