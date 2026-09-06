@@ -1,0 +1,17 @@
+{
+  "name": "SHIORI — 暮らしに、しおりを。",
+  "short_name": "SHIORI",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6f7fa",
+  "theme_color": "#f6f7fa",
+  "description": "日本生活の支出を記錄し、儲蓄を支援する個人用 Web App",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

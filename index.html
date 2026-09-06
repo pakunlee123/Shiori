@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f6f7fa">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="SHIORI">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <title>SHIORI — 暮らしに、しおりを。</title>
+  <style>
+    :root{--bg:#f6f7fa;--card:#fff;--ink:#20232a;--muted:#858b98;--line:#e9ebf0;--blue:#7593e8;--blue2:#eaf0ff;--peach:#f4c4b5;--green:#8fc1a5;--purple:#c5b7e7;--shadow:0 10px 30px rgba(35,42,58,.06);--r:24px}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Hiragino Sans","Noto Sans TC",sans-serif}
+    button,input,select{font:inherit}button{cursor:pointer;border:0}
+    .app{min-height:100vh;display:flex}.side{width:235px;padding:28px 18px;border-right:1px solid var(--line);background:rgba(255,255,255,.72);position:fixed;height:100vh}
+    .brand{display:flex;align-items:center;gap:10px;padding:4px 10px 35px}.mark{width:36px;height:36px;border-radius:12px;background:linear-gradient(145deg,#7593e8,#aabaf0);display:grid;place-items:center;color:#fff;font-weight:700}.brand b{letter-spacing:3px;font-size:15px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:1px;margin-top:2px}
+    .nav button{width:100%;padding:13px 14px;margin:4px 0;background:transparent;border-radius:15px;text-align:left;color:#747b88}.nav button.active{background:var(--blue2);color:#4d6dc0;font-weight:600}.nav span{margin-right:10px}
+    .main{width:100%;max-width:1180px;margin-left:235px;padding:30px 34px 60px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}.hello small{color:var(--muted)}.hello h1{font-size:25px;margin:4px 0}.avatar{width:42px;height:42px;border-radius:50%;background:#e8ecf7;display:grid;place-items:center;color:#6174a9}
+    .page{display:none}.page.active{display:block}.grid{display:grid;grid-template-columns:1.35fr .8fr;gap:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;box-shadow:var(--shadow)}
+    .saving{background:linear-gradient(135deg,#7898ee,#a8b9f1);color:#fff;border:0;min-height:250px;position:relative;overflow:hidden}.saving:after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;right:-75px;top:-80px;background:rgba(255,255,255,.11)}
+    .eyebrow{font-size:12px;opacity:.82}.big{font-size:44px;font-weight:650;letter-spacing:-2px;margin:12px 0}.goalrow{display:flex;justify-content:space-between;font-size:13px;opacity:.9}.bar{height:9px;background:rgba(255,255,255,.35);border-radius:20px;margin-top:9px;overflow:hidden}.bar i{display:block;height:100%;width:61.6%;background:#fff;border-radius:20px}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}.stat{padding:18px;border:1px solid var(--line);border-radius:19px;background:#fff}.stat small{color:var(--muted)}.stat strong{display:block;font-size:22px;margin-top:8px}
+    .sectionhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.sectionhead h2{font-size:17px;margin:0}.link{color:#6076bd;background:none}
+    .donut{width:170px;height:170px;border-radius:50%;background:conic-gradient(var(--blue) 0 36%,var(--peach) 36% 58%,var(--green) 58% 73%,var(--purple) 73% 86%,#dfe2e8 86%);position:relative;margin:10px auto 18px}.donut:after{content:"¥82,430";position:absolute;inset:27px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:17px;font-weight:650}
+    .legend{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12px;color:#666}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;background:var(--blue)}
+    .rows{display:grid;gap:9px}.tx{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.tx:last-child{border:0}.ico{width:40px;height:40px;border-radius:14px;background:#f0f3fb;display:grid;place-items:center}.tx main{flex:1}.tx b{font-size:14px}.tx small{display:block;color:var(--muted);margin-top:3px}.amt{font-weight:650}
+    .insight{background:#faf7f4}.insight p{line-height:1.7;margin:7px 0;color:#555;font-size:14px}.fab{position:fixed;right:32px;bottom:28px;width:62px;height:62px;border-radius:50%;background:var(--blue);color:#fff;font-size:31px;box-shadow:0 12px 30px rgba(80,105,180,.3);z-index:5}
+    .mobile-nav{display:none}.modal{position:fixed;inset:0;background:rgba(20,25,35,.35);backdrop-filter:blur(5px);display:none;align-items:flex-end;justify-content:center;z-index:10}.sheet{background:#fff;width:min(560px,100%);border-radius:28px 28px 0 0;padding:24px}.sheet h2{margin:0 0 5px}.sheet p{color:var(--muted);font-size:13px}.upload{border:1.5px dashed #cdd3df;border-radius:20px;padding:28px;text-align:center;margin:18px 0;background:#fafbfe}.upload input{display:none}.upload label{display:block;color:#5670c1;font-weight:600}.form{display:grid;gap:10px}.form input,.form select{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:14px;background:#fafbfc}.savebtn{padding:14px;border-radius:16px;background:var(--blue);color:#fff;font-weight:650}.close{position:absolute;right:20px;top:20px;background:#fff;border-radius:50%;width:38px;height:38px}
+    .tabs{display:flex;gap:8px;overflow:auto;margin-bottom:18px}.tab{padding:9px 14px;border-radius:12px;background:#f3f5f8;color:#777;white-space:nowrap}.tab.active{background:var(--blue2);color:#4d6dc0;font-weight:600}
+    @media(max-width:800px){.side{display:none}.main{margin:0;padding:20px 16px 105px}.top{margin-bottom:18px}.grid{display:block}.grid>*{margin-bottom:14px}.saving{min-height:225px}.big{font-size:38px}.stats{gap:8px}.stat{padding:14px}.stat strong{font-size:18px}.card{padding:18px;border-radius:21px}.mobile-nav{display:flex;position:fixed;z-index:6;left:12px;right:12px;bottom:12px;height:68px;background:rgba(255,255,255,.92);backdrop-filter:blur(18px);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);justify-content:space-around;align-items:center}.mobile-nav button{background:none;color:#7c8390;font-size:11px}.mobile-nav button.active{color:#5571c4;font-weight:650}.mobile-nav .plus{width:48px;height:48px;border-radius:17px;background:var(--blue);color:#fff;font-size:24px}.fab{display:none}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand"><div class="mark">栞</div><div><b>SHIORI</b><small>暮らしに、しおりを。</small></div></div>
+    <nav class="nav">
+      <button class="active" data-page="home"><span>⌂</span>首頁</button>
+      <button data-page="transactions"><span>▤</span>記錄</button>
+      <button data-page="analytics"><span>◔</span>分析</button>
+      <button data-page="settings"><span>⚙</span>設定</button>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <div class="top"><div class="hello"><small id="dateText"></small><h1>Good evening.</h1></div><div class="avatar">栞</div></div>
+
+    <section id="home" class="page active">
+      <div class="grid">
+        <div>
+          <div class="card saving">
+            <div class="eyebrow">今月の貯蓄目標</div>
+            <div class="big">¥150,000</div>
+            <div class="goalrow"><span>已儲 ¥92,400</span><span>61.6%</span></div>
+            <div class="bar"><i></i></div>
+            <div style="margin-top:30px;font-size:13px;opacity:.9">距離月底 24 日　·　每日目安 ¥2,865</div>
+          </div>
+          <div class="stats">
+            <div class="stat"><small>今月支出</small><strong>¥82,430</strong></div>
+            <div class="stat"><small>今週支出</small><strong>¥18,240</strong></div>
+            <div class="stat"><small>今日支出</small><strong>¥3,280</strong></div>
+          </div>
+          <div class="card" style="margin-top:18px">
+            <div class="sectionhead"><h2>最近の記錄</h2><button class="link" data-page="transactions">查看全部</button></div>
+            <div class="rows" id="txList">
+              <div class="tx"><div class="ico">🍜</div><main><b>ラーメン屋</b><small>飲食 · PayPay · 今日 19:24</small></main><div class="amt">¥1,280</div></div>
+              <div class="tx"><div class="ico">🛒</div><main><b>無印良品</b><small>購物 · 信用卡 · 今日 15:10</small></main><div class="amt">¥2,430</div></div>
+              <div class="tx"><div class="ico">🚃</div><main><b>東京メトロ</b><small>交通 · IC Card · 今日 11:02</small></main><div class="amt">¥170</div></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="sectionhead"><h2>今月の支出</h2><span style="font-size:12px;color:#888">9月</span></div>
+            <div class="donut"></div>
+            <div class="legend">
+              <div><i class="dot"></i>飲食　36%</div><div><i class="dot" style="background:var(--peach)"></i>購物　22%</div>
+              <div><i class="dot" style="background:var(--green)"></i>交通　15%</div><div><i class="dot" style="background:var(--purple)"></i>日用品　13%</div>
+            </div>
+          </div>
+          <div class="card insight" style="margin-top:18px"><div class="sectionhead"><h2>SHIORI insight</h2>✦</div><p>今月は<strong>飲食</strong>がいちばん大きな支出です。全体の36%を占めています。</p><p>今のペースなら、月末の予想支出は<strong>約¥123,000</strong>。貯蓄目標は達成できそうです。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="transactions" class="page">
+      <div class="card">
+        <div class="sectionhead"><h2>記錄</h2><button class="link" onclick="openModal()">＋ 記一筆</button></div>
+        <div class="tabs"><button class="tab active">全部</button><button class="tab">飲食</button><button class="tab">交通</button><button class="tab">購物</button><button class="tab">日用品</button></div>
+        <div id="allTx"></div>
+      </div>
+    </section>
+
+    <section id="analytics" class="page">
+      <div class="stats">
+        <div class="stat"><small>今月支出</small><strong>¥82,430</strong></div>
+        <div class="stat"><small>交易次數</small><strong>87</strong></div>
+        <div class="stat"><small>平均每筆</small><strong>¥947</strong></div>
+      </div>
+      <div class="card" style="margin-top:18px">
+        <div class="sectionhead"><h2>支出分析</h2></div>
+        <div class="tabs"><button class="tab active">每日</button><button class="tab">每週</button><button class="tab">每月</button></div>
+        <div class="donut"></div>
+        <div class="insight" style="padding:16px;border-radius:17px"><b>本月最主要支出：飲食</b><p>飲食 ¥29,675 · 購物 ¥18,137 · 交通 ¥12,365 · 日用品 ¥10,716</p></div>
+      </div>
+    </section>
+
+    <section id="settings" class="page">
+      <div class="card"><h2>儲蓄設定</h2><div class="form" style="margin-top:18px">
+        <label>每月儲蓄目標</label><input value="150000" type="number">
+        <label>每月收入（可選）</label><input value="300000" type="number">
+        <label>固定支出（可選）</label><input value="68000" type="number">
+        <button class="savebtn">儲存設定</button>
+      </div></div>
+      <div class="card" style="margin-top:14px"><h2>支付方式</h2><p>💳 信用卡　　🟢 PayPay　　💴 現金　　🚃 IC Card</p></div>
+    </section>
+  </main>
+</div>
+
+<button class="fab" onclick="openModal()">＋</button>
+<div class="mobile-nav">
+  <button class="active" data-page="home">⌂<br>首頁</button>
+  <button data-page="transactions">▤<br>記錄</button>
+  <button class="plus" onclick="openModal()">＋</button>
+  <button data-page="analytics">◔<br>分析</button>
+  <button data-page="settings">⚙<br>設定</button>
+</div>
+
+<div class="modal" id="modal">
+  <div class="sheet">
+    <button class="close" onclick="closeModal()">×</button>
+    <h2>記一筆</h2><p>留下今天的生活書籤。</p>
+    <div class="upload"><input id="receipt" type="file" accept="image/*" capture="environment"><label for="receipt">📷 拍攝／上傳收據</label><div id="preview" style="margin-top:10px"></div></div>
+    <div class="form">
+      <input id="merchant" placeholder="商戶名稱，例如 セブン-イレブン">
+      <input id="amount" type="number" placeholder="金額（JPY）">
+      <select id="category"><option>飲食</option><option>交通</option><option>日用品</option><option>購物</option><option>娛樂</option><option>住宿</option><option>通訊</option><option>醫療</option><option>工作</option><option>其他</option></select>
+      <select id="payment"><option>信用卡</option><option>PayPay</option><option>現金</option><option>IC Card</option></select>
+      <button class="savebtn" onclick="addTx()">確認記帳</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const navs=document.querySelectorAll('[data-page]'), pages=document.querySelectorAll('.page');
+  function showPage(id){pages.forEach(p=>p.classList.toggle('active',p.id===id));navs.forEach(n=>n.classList.toggle('active',n.dataset.page===id));scrollTo(0,0)}
+  navs.forEach(n=>n.addEventListener('click',()=>showPage(n.dataset.page)));
+  function openModal(){document.getElementById('modal').style.display='flex'}
+  function closeModal(){document.getElementById('modal').style.display='none'}
+  document.getElementById('dateText').textContent=new Intl.DateTimeFormat('en-US',{weekday:'long',day:'numeric',month:'long'}).format(new Date());
+
+  document.getElementById('receipt').addEventListener('change',e=>{
+    const f=e.target.files[0]; if(!f)return;
+    const r=new FileReader(); r.onload=()=>document.getElementById('preview').innerHTML='<img src="'+r.result+'" style="max-width:100%;max-height:180px;border-radius:14px">'; r.readAsDataURL(f);
+  });
+
+  let txs=JSON.parse(localStorage.getItem('shiori-txs')||'[]');
+  function iconFor(c){return c==='交通'?'🚃':c==='購物'?'🛍️':c==='娛樂'?'🎮':c==='日用品'?'🧴':'🍜'}
+  function render(){
+    const seed=[{merchant:'セブン-イレブン',amount:680,category:'飲食',payment:'PayPay'},{merchant:'スターバックス',amount:590,category:'飲食',payment:'信用卡'},{merchant:'東京メトロ',amount:170,category:'交通',payment:'IC Card'}];
+    const list=document.getElementById('allTx'); const data=txs.length?txs:seed;
+    list.innerHTML=data.map(t=>'<div class="tx"><div class="ico">'+iconFor(t.category)+'</div><main><b>'+escapeHtml(t.merchant)+'</b><small>'+t.category+' · '+t.payment+'</small></main><div class="amt">¥'+Number(t.amount).toLocaleString()+'</div></div>').join('');
+  }
+  function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+  function addTx(){
+    const merchant=document.getElementById('merchant').value||'未設定', amount=Number(document.getElementById('amount').value||0);
+    if(!amount){alert('請輸入金額');return}
+    txs.unshift({merchant,amount,category:document.getElementById('category').value,payment:document.getElementById('payment').value,date:new Date().toISOString()});
+    localStorage.setItem('shiori-txs',JSON.stringify(txs)); render(); closeModal(); showPage('transactions');
+    document.getElementById('merchant').value='';document.getElementById('amount').value='';document.getElementById('receipt').value='';document.getElementById('preview').innerHTML='';
+  }
+  render();
+  if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>
